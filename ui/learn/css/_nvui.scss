@@ -1,0 +1,170 @@
+.nvui {
+  padding: 2rem;
+
+  h1,
+  h2,
+  h3 {
+    margin: 1rem 0;
+  }
+
+  .nvui-stages {
+    margin: 2rem 0;
+
+    .stage {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 1px solid var(--c-border);
+
+      a {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--c-primary);
+        color: var(--c-primary-text);
+        text-decoration: none;
+        
+        &:hover,
+        &:focus {
+          background-color: var(--c-primary-hover);
+        }
+      }
+    }
+  }
+
+  .board-section {
+    margin: 2rem 0;
+
+    .boardstatus {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      background-color: var(--c-bg-zebra);
+    }
+
+    #move-form {
+      margin: 1rem 0;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+
+    .board-wrapper {
+      margin: 1rem 0;
+
+      button {
+        min-width: 3rem;
+        min-height: 3rem;
+        margin: 2px;
+        padding: 0.5rem;
+        
+        &.selected {
+          background-color: var(--c-primary);
+          color: var(--c-primary-text);
+        }
+
+        &.active {
+          outline: 2px solid var(--c-primary);
+        }
+
+        &.light {
+          background-color: #f0d9b5;
+          color: #000;
+        }
+
+        &.dark {
+          background-color: #b58863;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .completed,
+  .failed {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 2px solid;
+  }
+
+  .completed {
+    border-color: var(--c-good);
+    background-color: var(--c-good-bg);
+  }
+
+  .failed {
+    border-color: var(--c-bad);
+    background-color: var(--c-bad-bg);
+  }
+
+  .controls {
+    margin: 2rem 0;
+
+    button {
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  .instructions {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: var(--c-bg-zebra);
+
+    ul {
+      margin-left: 1.5rem;
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+
+  .pieces-list {
+    margin: 1rem 0;
+    
+    .pieces {
+      .white-pieces,
+      .black-pieces {
+        margin: 1rem 0;
+        
+        h3 {
+          margin-bottom: 0.5rem;
+        }
+        
+        p {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  .notifications {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    background-color: var(--c-bg-popup);
+    border: 2px solid var(--c-border);
+    z-index: 1000;
+    
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+// Hide visual elements when in blind mode
+body.blind-mode {
+  .learn--map .learn__side,
+  .learn--run .learn__side {
+    display: none;
+  }
+}

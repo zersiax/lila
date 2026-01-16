@@ -5,12 +5,14 @@ import { SideCtrl } from './sideCtrl';
 import { clearTimeouts } from './timeouts';
 import { extractHashParameters } from './hashRouting';
 import { RunCtrl } from './run/runCtrl';
+import type { NvuiPlugin } from './learn.nvui';
 
 export class LearnCtrl {
   data: LearnProgress = this.opts.storage.data;
 
   sideCtrl: SideCtrl;
   runCtrl: RunCtrl;
+  nvui?: NvuiPlugin;
 
   constructor(
     readonly opts: LearnOpts,
@@ -22,6 +24,14 @@ export class LearnCtrl {
 
     this.sideCtrl = new SideCtrl(this, opts);
     this.runCtrl = new RunCtrl(opts, redraw);
+
+    // Initialize NVUI if blind mode is enabled
+    if (site.blindMode) {
+      import('./learn.nvui').then(nvuiModule => {
+        this.nvui = nvuiModule.initModule(this);
+        this.redraw();
+      });
+    }
 
     window.addEventListener('hashchange', () => {
       this.setStageLevelFromHash();

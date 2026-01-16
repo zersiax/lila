@@ -275,4 +275,10 @@ export class LevelCtrl {
   };
 
   onComplete = () => this.opts.onComplete();
+
+  nextLevel = () => {
+    if (this.vm.completed) {
+      this.onComplete();
+    }
+  };
 }

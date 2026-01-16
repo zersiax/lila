@@ -9,7 +9,14 @@ import { mapSideView } from './mapSideView';
 import { hashHref } from './hashRouting';
 import { runView } from './run/runView';
 
-export const view = (ctrl: LearnCtrl): VNode => (ctrl.inStage() ? runView(ctrl) : mapView(ctrl));
+export const view = (ctrl: LearnCtrl): VNode => {
+  // If NVUI is enabled and loaded, use the NVUI view
+  if (ctrl.nvui) {
+    return ctrl.nvui.render();
+  }
+  // Otherwise use the standard view
+  return ctrl.inStage() ? runView(ctrl) : mapView(ctrl);
+};
 
 type Status = 'future' | 'done' | 'ongoing';
 
