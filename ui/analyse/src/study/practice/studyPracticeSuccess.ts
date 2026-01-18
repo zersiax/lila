@@ -10,7 +10,7 @@ const isDrawish = (node: TreeNode): boolean | null =>
 // returns null if not deep enough to know
 const isWinning = (node: TreeNode, goalCp: number, color: Color): boolean | null => {
   if (!hasSolidEval(node)) {
-    const pos = node.position().unwrap();
+    const pos = node.pos().unwrap();
     return pos.isStalemate() || pos.isInsufficientMaterial() ? false : null;
   }
 
@@ -35,9 +35,8 @@ const hasBlundered = (comment: Comment | null) =>
 export default function (root: AnalyseCtrl, goal: Goal, nbMoves: number): boolean | null {
   const node = root.node;
   if (!node.uci) return null;
-  const outcome = root.outcome();
-  if (outcome && outcome.winner && outcome.winner !== root.bottomColor()) return false;
-  if (outcome && outcome.winner && outcome.winner === root.bottomColor()) return true;
+  const outcome = node.outcome();
+  if (outcome?.winner) return outcome.winner === root.bottomColor();
   if (hasBlundered(root.practice!.comment())) return false;
   switch (goal.result) {
     case 'drawIn':
@@ -64,7 +63,7 @@ export default function (root: AnalyseCtrl, goal: Goal, nbMoves: number): boolea
     case 'mate':
       if (node.threefold) return false;
       if (isDrawish(node)) return false;
-      if (node.position().unwrap().isStalemate()) return false;
+      if (node.pos().unwrap().isStalemate()) return false;
   }
   return null;
 }

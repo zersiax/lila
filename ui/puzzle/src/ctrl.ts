@@ -284,7 +284,7 @@ export default class PuzzleCtrl implements CevalHandler {
       premovable: {
         enabled: false,
       },
-      check: !!node.check,
+      check: !!node.check(),
       lastMove: uciToMove(node.uci),
     };
     if (node.ply >= this.initialNode.ply) {
@@ -349,8 +349,7 @@ export default class PuzzleCtrl implements CevalHandler {
         fen: makeFen(pos.toSetup()),
         uci: makeUci(move),
         san,
-        position: () => Result.ok(pos),
-        check: pos.isCheck(),
+        pos: () => Result.ok(pos),
       }),
       path,
     );
@@ -547,7 +546,7 @@ export default class PuzzleCtrl implements CevalHandler {
   }
 
   toggleThreatMode = (): void => {
-    if (this.node.check) return;
+    if (this.node.check()) return;
     //if (!this.ceval.enabled()) this.ceval.toggle(); // ??
     if (!this.cevalEnabled()) return;
     this.threatMode.toggle();
