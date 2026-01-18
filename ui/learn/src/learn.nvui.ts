@@ -3,6 +3,7 @@ import { renderNvui } from './view/nvuiView';
 import { type NvuiContext, makeContext } from 'lib/nvui/chess';
 import { makeSetting, type Setting } from 'lib/nvui/setting';
 import { storage } from 'lib/storage';
+import type { VNode } from 'snabbdom';
 
 export type LearnNvuiContext = NvuiContext &
   Readonly<{
