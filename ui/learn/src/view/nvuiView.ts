@@ -77,15 +77,14 @@ function renderStageNvui(ctx: LearnNvuiContext): VNode {
           const move = input.value;
           if (move && cg) {
             // Attempt to make the move
-            const from = move.substring(0, 2) as SquareKey;
-            const to = move.substring(2, 4) as SquareKey;
+            const from = move.substring(0, 2) as Key;
+            const to = move.substring(2, 4) as Key;
             const promotion = move[4];
             
             if (cg.state.movable.dests?.get(from)?.includes(to)) {
-              cg.move(from, to);
-              if (promotion) {
-                cg.promote(to, promotion as cg.Role);
-              }
+              // Use the selectSquare and move API
+              cg.selectSquare(from);
+              cg.selectSquare(to);
               ctx.notify.set(`Moved from ${from} to ${to}`);
               input.value = '';
             } else {
